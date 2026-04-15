@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shree 💕</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    /* ===== CSS VARIABLES ===== */
+    :root {
+      --pink-light: #ffe4ef;
+      --pink-mid:   #ffb3d1;
+      --pink-deep:  #ff7ab2;
+      --pink-rose:  #e8648f;
+      --blush:      #ffd6e8;
+      --lavender:   #f0d6ff;
+      --cream:      #fff8f9;
+      --text-dark:  #7a3b5c;
+      --text-mid:   #b06080;
+      --glow:       rgba(255, 122, 178, 0.45);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: var(--cream);
+      color: var(--text-dark);
+      overflow-x: hidden;
+      cursor: none; /* custom cursor */
+    }
+
+    /* ===== CUSTOM CURSOR ===== */
+    #cursor-heart {
+      position: fixed;
+      pointer-events: none;
+      font-size: 20px;
+      z-index: 99999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease;
+      filter: drop-shadow(0 0 4px var(--pink-deep));
+    }
+
+    /* ===== FLOATING HEARTS CANVAS ===== */
+    #hearts-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ===== SECTIONS ===== */
+    section {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 20px;
+    }
+
+    /* ===== LANDING SECTION ===== */
+    #landing {
+      background: linear-gradient(160deg, #fff0f8 0%, #ffe4f0 40%, #ffd6e8 100%);
+      text-align: center;
+    }
+
+    .landing-sparkle-ring {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 30px;
+    }
+
+    .landing-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 10vw, 6.5rem);
+      color: var(--pink-rose);
+      text-shadow: 0 0 30px var(--glow), 0 0 60px rgba(255,122,178,0.2);
+      animation: titlePulse 3s ease-in-out infinite;
+      line-height: 1.1;
+    }
+
+    .landing-sub {
+      font-size: clamp(1rem, 3vw, 1.4rem);
+      color: var(--text-mid);
+      margin-top: 12px;
+      letter-spacing: 0.05em;
+      font-weight: 500;
+    }
+
+    @keyframes titlePulse {
+      0%, 100% { text-shadow: 0 0 30px var(--glow), 0 0 60px rgba(255,122,178,0.2); }
+      50% { text-shadow: 0 0 50px var(--glow), 0 0 100px rgba(255,122,178,0.4); }
+    }
+
+    /* CLICK ME BUTTON */
+    .btn-click-me {
+      margin-top: 48px;
+      padding: 18px 52px;
+      background: linear-gradient(135deg, var(--pink-deep), var(--pink-rose));
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      cursor: none;
+      box-shadow: 0 8px 30px rgba(232, 100, 143, 0.45);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-click-me::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+      border-radius: 50px;
+    }
+
+    .btn-click-me:hover {
+      transform: translateY(-4px) scale(1.04);
+      box-shadow: 0 14px 40px rgba(232,100,143,0.55);
+    }
+
+    .btn-click-me:active { transform: scale(0.97); }
+
+    /* small floating sparkle emojis around button */
+    .sparkles-ring {
+      position: absolute;
+      inset: -20px;
+      pointer-events: none;
+    }
+
+    .sparkle {
+      position: absolute;
+      font-size: 1.1rem;
+      animation: sparkleSpin 4s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes sparkleSpin {
+      0%   { transform: rotate(0deg) translateX(45px) rotate(0deg)   scale(1);   opacity: 0.8; }
+      50%  { opacity: 1; }
+      100% { transform: rotate(360deg) translateX(45px) rotate(-360deg) scale(1); opacity: 0.8; }
+    }
+
+    /* ===== AUDIO ===== */
+    /* Audio is started on "Click me" button press */
+
+    /* ===== COUNTDOWN ===== */
+    #countdown-section {
+      background: linear-gradient(160deg, #ffd6e8, #f0d6ff 60%, #ffd6e8);
+      text-align: center;
+      gap: 30px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      color: var(--pink-rose);
+      text-shadow: 0 0 20px var(--glow);
+      margin-bottom: 10px;
+    }
+
+    .countdown-wrapper {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .countdown-card {
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(10px);
+      border: 2px solid var(--pink-mid);
+      border-radius: 20px;
+      padding: 22px 28px;
+      text-align: center;
+      box-shadow: 0 6px 24px rgba(255,122,178,0.2);
+      min-width: 90px;
+    }
+
+    .countdown-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      color: var(--pink-deep);
+      line-height: 1;
+      display: block;
+    }
+
+    .countdown-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      margin-top: 6px;
+      display: block;
+    }
+
+    /* ===== MEMORIES SECTION ===== */
+    #memories {
+      background: linear-gradient(160deg, #fff0f8 0%, #fce8f3 100%);
+      gap: 40px;
+    }
+
+    .polaroid-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 28px;
+      justify-content: center;
+      max-width: 900px;
+    }
+
+    .polaroid {
+      background: #fff;
+      padding: 14px 14px 40px 14px;
+      box-shadow: 0 8px 32px rgba(232,100,143,0.15), 0 2px 8px rgba(0,0,0,0.06);
+      border-radius: 4px;
+      width: 210px;
+      transform: rotate(var(--rot, 0deg));
+      transition: transform 0.35s cubic-bezier(.34,1.56,.64,1), box-shadow 0.3s ease;
+      cursor: none;
+      position: relative;
+    }
+
+    .polaroid:hover {
+      transform: rotate(0deg) scale(1.07) translateY(-8px);
+      box-shadow: 0 20px 50px rgba(232,100,143,0.3);
+      z-index: 10;
+    }
+
+    /* Tape strip decoration */
+    .polaroid::before {
+      content: '';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 22px;
+      background: rgba(255,179,209,0.55);
+      border-radius: 3px;
+      backdrop-filter: blur(2px);
+    }
+
+    /* ===== INSERT YOUR IMAGES HERE =====
+       Replace the background-color of each .polaroid-img with:
+       background-image: url('your-photo-1.jpg');
+       background-size: cover;
+       background-position: center;
+       And remove or comment out the placeholder emoji/text.
+    ===================================== */
+    .polaroid-img {
+      width: 100%;
+      aspect-ratio: 1;
+      background-color: var(--blush);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.8rem;
+      overflow: hidden;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .polaroid-caption {
+      font-size: 0.78rem;
+      color: var(--text-mid);
+      text-align: center;
+      margin-top: 10px;
+      font-style: italic;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    /* ===== SCRATCH CARD SECTION ===== */
+    #hearts-section {
+      background: linear-gradient(160deg, #ffe4f0, #fce8fb 60%, #ffe0ee);
+      text-align: center;
+      gap: 28px;
+    }
+
+    .scratch-hint {
+      font-size: 0.9rem;
+      color: var(--text-mid);
+      letter-spacing: 0.04em;
+    }
+
+    .scratch-cards-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      justify-content: center;
+      max-width: 800px;
+    }
+
+    .scratch-card {
+      position: relative;
+      width: 220px;
+      height: 130px;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 8px 28px rgba(232,100,143,0.22);
+      flex-shrink: 0;
+    }
+
+    /* The revealed message underneath */
+    .scratch-reveal {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #fff0f8, #fce8f3);
+      border: 2px solid var(--pink-mid);
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--pink-rose);
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    /* The scratchable canvas layer on top */
+    .scratch-canvas {
+      position: absolute;
+      inset: 0;
+      border-radius: 18px;
+      cursor: none;
+      touch-action: none;
+    }
+
+    .scratch-done-label {
+      position: absolute;
+      bottom: 6px;
+      right: 10px;
+      font-size: 0.65rem;
+      color: var(--pink-rose);
+      opacity: 0;
+      transition: opacity 0.5s;
+      pointer-events: none;
+      letter-spacing: 0.08em;
+    }
+
+    .scratch-done-label.show { opacity: 1; }
+
+    /* ===== PROM QUESTION SECTION ===== */
+    #prom-question {
+      background: linear-gradient(160deg, #fff0f8, #ffeaf5 50%, #ffd6e8);
+      text-align: center;
+      gap: 30px;
+    }
+
+    .prom-q-text {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 5vw, 2.8rem);
+      color: var(--pink-rose);
+      max-width: 600px;
+      line-height: 1.4;
+    }
+
+    .btn-ask-prom {
+      padding: 20px 56px;
+      background: linear-gradient(135deg, #ff9ec7, var(--pink-rose));
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      cursor: none;
+      box-shadow: 0 8px 30px rgba(232,100,143,0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-ask-prom:hover {
+      transform: translateY(-4px) scale(1.04);
+      box-shadow: 0 16px 40px rgba(232,100,143,0.5);
+    }
+
+    .answer-buttons {
+      display: none;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .answer-buttons.visible { display: flex; }
+
+    .btn-yes {
+      padding: 16px 44px;
+      border-radius: 50px;
+      border: none;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      cursor: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-yes-big {
+      background: linear-gradient(135deg, #ff7ab2, #e8648f);
+      color: #fff;
+      font-size: 1.3rem;
+      box-shadow: 0 8px 28px rgba(232,100,143,0.4);
+    }
+
+    .btn-yes-small {
+      background: rgba(255,255,255,0.8);
+      color: var(--pink-rose);
+      font-size: 0.95rem;
+      border: 2px solid var(--pink-mid);
+    }
+
+    .btn-yes:hover {
+      transform: scale(1.08) translateY(-3px);
+      box-shadow: 0 12px 36px rgba(232,100,143,0.4);
+    }
+
+    /* ===== FINAL SECTION ===== */
+    #final {
+      background: linear-gradient(160deg, #ffe4f0 0%, #fce8ff 50%, #ffe4f0 100%);
+      text-align: center;
+      gap: 30px;
+    }
+
+    .final-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 7vw, 5rem);
+      color: var(--pink-rose);
+      text-shadow: 0 0 40px var(--glow), 0 0 80px rgba(255,122,178,0.3);
+      animation: finalGlow 2.5s ease-in-out infinite;
+      line-height: 1.2;
+    }
+
+    @keyframes finalGlow {
+      0%, 100% { text-shadow: 0 0 40px var(--glow); }
+      50%       { text-shadow: 0 0 70px var(--glow), 0 0 120px rgba(255,100,160,0.5); }
+    }
+
+    /* ===== FINAL POLAROID ===== */
+    .final-polaroid {
+      background: #fff;
+      padding: 14px 14px 44px 14px;
+      box-shadow: 0 12px 40px rgba(232,100,143,0.25), 0 2px 8px rgba(0,0,0,0.07);
+      border-radius: 4px;
+      width: 240px;
+      position: relative;
+      animation: finalPolaroidFloat 3s ease-in-out infinite;
+    }
+
+    /* Tape strip on final polaroid */
+    .final-polaroid::before {
+      content: '';
+      position: absolute;
+      top: -13px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70px;
+      height: 24px;
+      background: rgba(255,179,209,0.55);
+      border-radius: 3px;
+    }
+
+    @keyframes finalPolaroidFloat {
+      0%, 100% { transform: rotate(-2deg) translateY(0); }
+      50%       { transform: rotate(2deg) translateY(-8px); }
+    }
+
+    /* ===== INSERT FINAL PHOTO HERE =====
+       Replace background-color below with:
+       background-image: url('us-photo.jpg');
+       background-size: cover;
+       background-position: center;
+    ===================================== */
+    .final-polaroid-img {
+      width: 100%;
+      aspect-ratio: 1;
+      background-color: var(--blush);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .final-polaroid-caption {
+      font-size: 0.82rem;
+      color: var(--text-mid);
+      text-align: center;
+      margin-top: 10px;
+      font-style: italic;
+      font-weight: 600;
+    }
+
+    /* SECRET MESSAGE */
+    .secret-area {
+      margin-top: 60px;
+      font-size: 0.7rem;
+      color: rgba(232,100,143,0.25);
+      letter-spacing: 0.15em;
+      cursor: none;
+      transition: color 0.4s;
+      user-select: none;
+    }
+
+    .secret-area:hover { color: rgba(232,100,143,0.5); }
+
+    .secret-msg {
+      display: none;
+      margin-top: 16px;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--pink-rose);
+      animation: fadeInUp 0.6s ease;
+    }
+
+    .secret-msg.show { display: block; }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== CONFETTI CANVAS ===== */
+    #confetti-canvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9998;
+    }
+
+    /* ===== UPLOAD POLAROID ===== */
+    #upload-polaroid { transition: transform 0.35s cubic-bezier(.34,1.56,.64,1), box-shadow 0.3s ease; }
+    #upload-polaroid:hover { transform: rotate(0deg) scale(1.06) translateY(-8px); box-shadow: 0 20px 50px rgba(232,100,143,0.35); }
+
+    /* ===== SCROLL DOWN HINT ===== */
+    .scroll-hint {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.8rem;
+      color: var(--text-mid);
+      letter-spacing: 0.1em;
+      animation: bounce 2s ease-in-out infinite;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .scroll-hint.visible { opacity: 1; }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(-8px); }
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 480px) {
+      .polaroid { width: 160px; }
+      .countdown-card { padding: 16px 18px; min-width: 70px; }
+      .countdown-num { font-size: 2.2rem; }
+    }
+
+    /* ===== INITIAL HIDDEN STATE ===== */
+    #countdown-section, #memories, #hearts-section, #prom-question, #final {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .section-visible {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Custom cursor -->
+<div id="cursor-heart">🩷</div>
+
+<!-- Background hearts canvas -->
+<canvas id="hearts-canvas"></canvas>
+
+<!-- Confetti canvas -->
+<canvas id="confetti-canvas"></canvas>
+
+<!-- ===================== LANDING ===================== -->
+<section id="landing">
+  <div class="landing-sparkle-ring">
+    <h1 class="landing-title">Hi Shree 💕</h1>
+    <p class="landing-sub">something cute is waiting for you…</p>
+  </div>
+
+  <div style="position:relative; display:inline-block;">
+    <button class="btn-click-me" id="btn-start" onclick="startJourney()">Click me!! ✨</button>
+  </div>
+
+  <div class="scroll-hint" id="scroll-hint">scroll down ↓</div>
+</section>
+
+<!-- ===================== COUNTDOWN ===================== -->
+<section id="countdown-section">
+  <h2 class="section-title">⏳ Countdown to Prom</h2>
+  <p style="color:var(--text-mid); font-size:0.95rem; letter-spacing:0.06em;">
+    <!-- ✏️ Change this date to your actual prom date! Format: YYYY-MM-DD -->
+    every second counts 🩷
+  </p>
+  <div class="countdown-wrapper">
+    <div class="countdown-card"><span class="countdown-num" id="cd-days">--</span><span class="countdown-label">Days</span></div>
+    <div class="countdown-card"><span class="countdown-num" id="cd-hours">--</span><span class="countdown-label">Hours</span></div>
+    <div class="countdown-card"><span class="countdown-num" id="cd-mins">--</span><span class="countdown-label">Minutes</span></div>
+    <div class="countdown-card"><span class="countdown-num" id="cd-secs">--</span><span class="countdown-label">Seconds</span></div>
+  </div>
+</section>
+
+<!-- ===================== MEMORIES ===================== -->
+<section id="memories">
+  <h2 class="section-title">Our Memories 💗</h2>
+  <p style="color:var(--text-mid); font-size:0.9rem; margin-bottom:10px;">a lil scrapbook of us ✂️🎀</p>
+
+  <div class="polaroid-grid">
+
+    <!-- 📸 PHOTO 1 — replace the emoji with your image:
+         In .polaroid-img style, add: background-image: url('photo1.jpg');
+         and remove the emoji span inside. -->
+    <div class="polaroid" style="--rot: -3deg;">
+      <div class="polaroid-img">📸</div>
+      <p class="polaroid-caption">us being chaotic 🌀</p>
+    </div>
+
+    <!-- 📸 PHOTO 2 -->
+    <div class="polaroid" style="--rot: 2deg;">
+      <div class="polaroid-img">📸</div>
+      <p class="polaroid-caption">best day ever ☀️</p>
+    </div>
+
+    <!-- 📸 PHOTO 3 -->
+    <div class="polaroid" style="--rot: -2deg;">
+      <div class="polaroid-img">📸</div>
+      <p class="polaroid-caption">idk why we're like this 💀</p>
+    </div>
+
+    <!-- 📸 PHOTO 4 -->
+    <div class="polaroid" style="--rot: 3.5deg;">
+      <div class="polaroid-img">📸</div>
+      <p class="polaroid-caption">literally iconic 🌸</p>
+    </div>
+
+    <!-- 📸 PHOTO 5 -->
+    <div class="polaroid" style="--rot: -1.5deg;">
+      <div class="polaroid-img">📸</div>
+      <p class="polaroid-caption">we really said slay 💅</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== SCRATCH CARD ===================== -->
+<section id="hearts-section">
+  <h2 class="section-title">A little message for you 🩷</h2>
+  <p class="scratch-hint">scratch away the pink to reveal what's underneath ✨</p>
+
+  <div class="scratch-card" id="single-scratch-card" style="width:320px; height:180px;">
+    <div class="scratch-reveal" id="single-scratch-reveal">
+      you're literally my favourite person and prom is gonna be the best night because of you 💕
+    </div>
+    <canvas class="scratch-canvas" id="single-scratch-canvas" width="320" height="180"></canvas>
+    <span class="scratch-done-label" id="single-scratch-done">✨ all clear!</span>
+  </div>
+</section>
+
+<!-- ===================== PROM QUESTION ===================== -->
+<section id="prom-question">
+  <p class="prom-q-text">okay so… I have a very important question 👀</p>
+
+  <p class="prom-q-text" style="font-size: clamp(1.8rem, 5.5vw, 3rem); margin-top: 10px;">Will you go to prom with me? 🌸</p>
+
+  <div class="answer-buttons" id="answer-btns" style="display:flex;">
+    <button class="btn-yes btn-yes-big" onclick="celebrate()">YES!!!! 💖</button>
+    <button class="btn-yes btn-yes-small" onclick="celebrate()">yes 🤍</button>
+  </div>
+
+  <p id="prom-reaction" style="font-family:'Playfair Display',serif; font-size:1.5rem; color:var(--pink-rose); opacity:0; transition:opacity 0.5s; margin-top:20px;"></p>
+</section>
+
+<!-- ===================== FINAL ===================== -->
+<section id="final">
+
+  <!-- POLAROID PHOTO UPLOAD — click to add a photo of you two -->
+  <div class="final-polaroid" id="upload-polaroid" onclick="document.getElementById('photo-upload-input').click()" title="Click to add a photo of us!">
+    <div class="final-polaroid-img" id="upload-polaroid-img">
+      <span id="upload-placeholder" style="font-size:1rem; color:var(--text-mid); text-align:center; padding:10px; line-height:1.5;">📸<br><span style="font-size:0.7rem;">tap to add a<br>photo of us</span></span>
+    </div>
+    <p class="final-polaroid-caption">us 💕</p>
+  </div>
+  <input type="file" id="photo-upload-input" accept="image/*" style="display:none;" onchange="handlePhotoUpload(event)">
+
+  <h2 class="final-title">Prom with me, Shree? 💖</h2>
+  <p style="color:var(--text-mid); font-size:1rem; letter-spacing:0.05em; max-width:400px; text-align:center; line-height:1.8;">
+    it's gonna be the best night ever<br>and I can't imagine it with anyone else 🌸
+  </p>
+
+  <!-- SECRET MESSAGE — hidden, click the small text below to reveal -->
+  <div class="secret-area" onclick="revealSecret()" title="psst…">
+    · · · · ·
+  </div>
+  <p class="secret-msg" id="secret-msg">
+    💌 "you're stuck with me forever btw"
+  </p>
+</section>
+
+<!-- ===================== AUDIO =====================
+  🎵 TO ADD YOUR SONG:
+  1. Upload your audio file (mp3/ogg) to the same folder as this HTML file.
+  2. Uncomment the <audio> tag below and set src to your filename.
+  3. Or replace the src with a direct URL to an audio file.
+  The song plays when "Click me!!" is pressed.
+===================================================== -->
+<!--
+<audio id="bg-music" loop>
+  <source src="your-song.mp3" type="audio/mpeg">
+</audio>
+-->
+
+<script>
+  /* ==========================================
+     CONFIGURATION — edit these ✏️
+  ========================================== */
+  // 🗓️ Set your prom date here! Format: 'YYYY-MM-DDTHH:MM:SS'
+  const PROM_DATE = new Date('2026-06-22T17:30:00');
+
+  /* ==========================================
+     CURSOR
+  ========================================== */
+  const cursorHeart = document.getElementById('cursor-heart');
+  document.addEventListener('mousemove', e => {
+    cursorHeart.style.left = e.clientX + 'px';
+    cursorHeart.style.top  = e.clientY + 'px';
+  });
+
+  /* ==========================================
+     BACKGROUND FLOATING HEARTS CANVAS
+  ========================================== */
+  const canvas = document.getElementById('hearts-canvas');
+  const ctx    = canvas.getContext('2d');
+  let W, H, bgHearts = [];
+
+  function resizeCanvas() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+
+  function makeBgHeart() {
+    return {
+      x:    Math.random() * W,
+      y:    H + 30,
+      size: 14 + Math.random() * 24,
+      speed:0.4 + Math.random() * 0.8,
+      drift:(Math.random() - 0.5) * 0.5,
+      char: '💕',
+      opacity: 0.35 + Math.random() * 0.45,
+    };
+  }
+
+  for (let i = 0; i < 22; i++) {
+    const h = makeBgHeart();
+    h.y = Math.random() * H; // spread initial positions
+    bgHearts.push(h);
+  }
+
+  function drawBgHearts() {
+    ctx.clearRect(0, 0, W, H);
+    bgHearts.forEach(h => {
+      ctx.globalAlpha = h.opacity;
+      ctx.font = h.size + 'px serif';
+      ctx.fillText(h.char, h.x, h.y);
+      h.y    -= h.speed;
+      h.x    += h.drift;
+      if (h.y < -40) Object.assign(h, makeBgHeart());
+    });
+    requestAnimationFrame(drawBgHearts);
+  }
+
+  drawBgHearts();
+
+  /* ==========================================
+     START JOURNEY
+  ========================================== */
+  function startJourney() {
+    // Try playing background music if element exists
+    const music = document.getElementById('bg-music');
+    if (music) music.play().catch(() => {});
+
+    // Reveal scroll hint
+    document.getElementById('scroll-hint').classList.add('visible');
+
+    // Scroll to next section
+    setTimeout(() => {
+      document.getElementById('countdown-section').scrollIntoView({ behavior: 'smooth' });
+    }, 300);
+  }
+
+  /* ==========================================
+     INTERSECTION OBSERVER — reveal sections
+  ========================================== */
+  const sections = document.querySelectorAll('#countdown-section, #memories, #hearts-section, #prom-question, #final');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('section-visible');
+    });
+  }, { threshold: 0.15 });
+
+  sections.forEach(s => observer.observe(s));
+
+  /* ==========================================
+     COUNTDOWN
+  ========================================== */
+  function updateCountdown() {
+    const now  = new Date();
+    const diff = PROM_DATE - now;
+
+    if (diff <= 0) {
+      ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id => document.getElementById(id).textContent = '00');
+      return;
+    }
+
+    const days  = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const mins  = Math.floor((diff % 3600000)  / 60000);
+    const secs  = Math.floor((diff % 60000)    / 1000);
+
+    document.getElementById('cd-days').textContent  = String(days).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0');
+    document.getElementById('cd-mins').textContent  = String(mins).padStart(2,'0');
+    document.getElementById('cd-secs').textContent  = String(secs).padStart(2,'0');
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  /* ==========================================
+     SINGLE SCRATCH CARD
+  ========================================== */
+  (function() {
+    const cv = document.getElementById('single-scratch-canvas');
+    const doneLabel = document.getElementById('single-scratch-done');
+    const cx = cv.getContext('2d');
+
+    const grad = cx.createLinearGradient(0, 0, 320, 180);
+    grad.addColorStop(0, '#ffb3d1');
+    grad.addColorStop(0.5, '#ff9ec7');
+    grad.addColorStop(1, '#ffb3d1');
+    cx.fillStyle = grad;
+    cx.beginPath();
+    roundRect(cx, 0, 0, 320, 180, 18);
+    cx.fill();
+
+    // Texture dots
+    for (let i = 0; i < 80; i++) {
+      cx.fillStyle = 'rgba(255,255,255,0.15)';
+      cx.beginPath();
+      cx.arc(Math.random()*320, Math.random()*180, Math.random()*5+1, 0, Math.PI*2);
+      cx.fill();
+    }
+
+    cx.fillStyle = 'rgba(255,255,255,0.75)';
+    cx.font = 'bold 15px Quicksand, sans-serif';
+    cx.textAlign = 'center';
+    cx.fillText('scratch me ✨', 160, 90);
+
+    cx.globalCompositeOperation = 'destination-out';
+
+    let scratching = false;
+    let done = false;
+
+    function scratchAt(x, y) {
+      cx.beginPath();
+      cx.arc(x, y, 28, 0, Math.PI * 2);
+      cx.fill();
+    }
+
+    function checkDone() {
+      if (done) return;
+      const data = cx.getImageData(0, 0, 320, 180).data;
+      let cleared = 0;
+      for (let i = 3; i < data.length; i += 4) { if (data[i] === 0) cleared++; }
+      if (cleared / (320 * 180) > 0.55) {
+        done = true;
+        cv.style.pointerEvents = 'none';
+        cv.style.transition = 'opacity 0.5s';
+        cv.style.opacity = '0';
+        doneLabel.classList.add('show');
+      }
+    }
+
+    cv.addEventListener('mousedown', e => { scratching = true; scratchAt(...getPos(e, cv)); });
+    cv.addEventListener('mousemove', e => { if (!scratching) return; scratchAt(...getPos(e, cv)); checkDone(); });
+    cv.addEventListener('mouseup',   () => scratching = false);
+    cv.addEventListener('mouseleave',() => scratching = false);
+    cv.addEventListener('touchstart', e => { e.preventDefault(); scratching = true; scratchAt(...getTouchPos(e, cv)); }, {passive:false});
+    cv.addEventListener('touchmove',  e => { e.preventDefault(); if (!scratching) return; scratchAt(...getTouchPos(e, cv)); checkDone(); }, {passive:false});
+    cv.addEventListener('touchend',   () => scratching = false);
+  })();
+
+  function getPos(e, el) {
+    const r = el.getBoundingClientRect();
+    return [e.clientX - r.left, e.clientY - r.top];
+  }
+
+  function getTouchPos(e, el) {
+    const r = el.getBoundingClientRect();
+    const t = e.touches[0];
+    return [t.clientX - r.left, t.clientY - r.top];
+  }
+
+  function roundRect(ctx, x, y, w, h, r) {
+    ctx.moveTo(x + r, y);
+    ctx.lineTo(x + w - r, y);
+    ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+    ctx.lineTo(x + w, y + h - r);
+    ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+    ctx.lineTo(x + r, y + h);
+    ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+    ctx.lineTo(x, y + r);
+    ctx.quadraticCurveTo(x, y, x + r, y);
+    ctx.closePath();
+  }
+
+  /* ==========================================
+     PHOTO UPLOAD HANDLER
+  ========================================== */
+  function handlePhotoUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const imgEl = document.getElementById('upload-polaroid-img');
+      imgEl.style.backgroundImage = 'url(' + e.target.result + ')';
+      imgEl.style.backgroundSize = 'cover';
+      imgEl.style.backgroundPosition = 'center';
+      document.getElementById('upload-placeholder').style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+  }
+
+  /* ==========================================
+     CELEBRATE — CONFETTI + HEARTS EXPLOSION
+  ========================================== */
+  const confettiCanvas = document.getElementById('confetti-canvas');
+  const cCtx = confettiCanvas.getContext('2d');
+  confettiCanvas.width  = window.innerWidth;
+  confettiCanvas.height = window.innerHeight;
+  window.addEventListener('resize', () => {
+    confettiCanvas.width  = window.innerWidth;
+    confettiCanvas.height = window.innerHeight;
+  });
+
+  let confettiPieces = [];
+  let confettiRunning = false;
+
+  const CONFETTI_COLORS = ['#ff7ab2','#ffb3d1','#e8648f','#ffd6e8','#f0d6ff','#ff9ec7','#ffffff'];
+
+  function launchConfetti() {
+    confettiPieces = [];
+    for (let i = 0; i < 160; i++) {
+      confettiPieces.push({
+        x:    Math.random() * window.innerWidth,
+        y:    Math.random() * window.innerHeight - window.innerHeight,
+        r:    4 + Math.random() * 8,
+        d:    1 + Math.random() * 3,
+        color: CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)],
+        tilt: Math.random() * 10 - 5,
+        isHeart: Math.random() > 0.5,
+      });
+    }
+    confettiRunning = true;
+    drawConfetti();
+
+    setTimeout(() => { confettiRunning = false; cCtx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height); }, 3500);
+  }
+
+  function drawConfetti() {
+    if (!confettiRunning) return;
+    cCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+    confettiPieces.forEach(p => {
+      cCtx.save();
+      cCtx.translate(p.x, p.y);
+      cCtx.rotate(p.tilt * Math.PI / 180);
+      if (p.isHeart) {
+        cCtx.font = (p.r * 2) + 'px serif';
+        cCtx.fillText('💕', 0, 0);
+      } else {
+        cCtx.fillStyle = p.color;
+        cCtx.fillRect(-p.r/2, -p.r/2, p.r, p.r);
+      }
+      cCtx.restore();
+      p.y    += p.d * 2;
+      p.x    += Math.sin(p.tilt) * 1.5;
+      p.tilt += 0.1;
+    });
+    requestAnimationFrame(drawConfetti);
+  }
+
+  function celebrate() {
+    launchConfetti();
+
+    const reaction = document.getElementById('prom-reaction');
+    reaction.textContent = '💖 YAY!! this is literally the best day ever 💖';
+    reaction.style.opacity = '1';
+
+    // Auto-scroll to final section after a moment
+    setTimeout(() => {
+      document.getElementById('final').scrollIntoView({ behavior: 'smooth' });
+    }, 2000);
+  }
+
+  /* ==========================================
+     SECRET MESSAGE
+  ========================================== */
+  function revealSecret() {
+    document.getElementById('secret-msg').classList.add('show');
+    launchConfetti();
+  }
+
+</script>
+</body>
+</html>
