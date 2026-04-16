@@ -291,6 +291,21 @@
       letter-spacing: 0.02em;
     }
 
+    .special-polaroid {
+  width: 320px;
+  transform: rotate(0deg);
+  padding: 14px 14px 22px;
+}
+
+.special-polaroid-img {
+  height: 380px;
+  background: #f7f7f7;
+}
+
+.special-polaroid-img img {
+  object-fit: contain;
+}
+
     /* ===== SCRATCH CARD SECTION ===== */
     #hearts-section {
       background: linear-gradient(160deg, #ffe4f0, #fce8fb 60%, #ffe0ee);
@@ -722,15 +737,18 @@
 <section id="final">
 
   <!-- POLAROID PHOTO UPLOAD — click to add a photo of you two -->
+
+<div class="polaroid special-polaroid" style="--rot: 2deg;">
+  <div class="polaroid-img special-polaroid-img">
+    <img src="photobooth.png" alt="best day ever">
   </div>
-<div class="polaroid" style="--rot: 2deg;">
-      <div class="polaroid-img">
-      <img src="photobooth.png" alt="best day ever">
-        </div>
-  <h2 class="final-title">Prom with me, Shree? 💖</h2>
-  <p style="color:var(--text-mid); font-size:1rem; letter-spacing:0.05em; max-width:400px; text-align:center; line-height:1.8;">
-    it's gonna be the best night ever<br>and I can't imagine it with anyone else 🌸
-  </p>
+</div>
+
+<h2 class="final-title">Prom with me, Shree? 💖</h2>
+<p style="color:var(--text-mid); font-size:1rem; letter-spacing:0.05em; max-width:400px; text-align:center; line-height:1.8;">
+  it's gonna be the best night ever<br>
+  and I can't imagine it with anyone else 🌸
+</p>
 
   <!-- SECRET MESSAGE — hidden, click the small text below to reveal -->
   <div class="secret-area" onclick="revealSecret()" title="psst…">
